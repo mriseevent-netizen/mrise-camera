@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M-RISE HEROES Camera</title>
+</head>
+<body>
+  <h2>M-RISE HEROES</h2>
+  <p>Camera test</p><video id="video" autoplay playsinline style="width:100%;max-width:400px"></video>
+<br>
+<button id="start">Open Camera</button>
+
+  <p id="status">Camera not started.</p>  <script>
+    const video = document.getElementById('video');
+    const status = document.getElementById('status');
+
+    document.getElementById('start').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'user' },
+          audio: false
+        });
+        video.srcObject = stream;
+        status.textContent = 'Camera opened successfully!';
+      } catch (error) {
+        status.textContent = 'Camera error: ' + error.name + ' — ' + error.message;
+      }
+    });
+  </script></body>
+</html>
